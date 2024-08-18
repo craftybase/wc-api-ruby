@@ -97,7 +97,12 @@ module WooCommerce
 
       endpoint += "?" unless endpoint.include? "?"
       endpoint += "&" unless endpoint.end_with? "?"
-      endpoint + URI.encode(flatten_hash(data).join("&"))
+
+      query_params = data.map do |key, value|
+        "#{CGI.escapeURIComponent(key.to_s)}=#{CGI.escapeURIComponent(value.to_s)}"
+      end.join("&")
+
+      endpoint + query_params
     end
 
     # Internal: Get URL for requests
