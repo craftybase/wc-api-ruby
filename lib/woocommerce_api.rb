@@ -32,7 +32,7 @@ module WooCommerce
       @httparty_args = args[:httparty_args]
 
       # Internal args
-      @is_ssl = @url.start_with? "https"
+      @is_ssl = @url.downcase.start_with? "https"
     end
 
     # Public: GET requests.
